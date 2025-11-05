@@ -9,15 +9,14 @@ var asteroid
 var moving:bool = false
 var movement_vector:Vector2
 var speed:int = 50
+var value:int
 
 
 
 func _physics_process(delta: float) -> void:
 	if moving:
-
 		rotation += 3*delta
 		global_position += movement_vector*delta*speed
-
 	else:
 		return
 
@@ -26,6 +25,7 @@ func populate(pos:Vector2, data:AsteroidInfo):
 	sprite_2d.texture = data.icon 
 	collision_shape_2d.shape = data.collider
 	light_occluder_2d.occluder = data.occluder
+	value = data.score
 
 
 func move(direction):
@@ -35,3 +35,7 @@ func move(direction):
 
 func _on_show_timer_timeout() -> void:
 	visible = true
+	
+func destroy():
+	globals.score += value
+	queue_free()

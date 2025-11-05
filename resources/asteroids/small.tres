@@ -10,4 +10,5 @@ script = ExtResource("4_npu7x")
 icon = ExtResource("2_m6ktf")
 occluder = ExtResource("3_bh4lb")
 collider = ExtResource("1_3pole")
+score = 100
 metadata/_custom_type_script = "uid://dyx7w4xxxcaou"

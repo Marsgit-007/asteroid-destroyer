@@ -11,9 +11,10 @@ var speed:int = 10000
 var turn_speed:int = 3
 var power
 var drag: float = 0.955
+var elapsed_time:float = 0.0
 
 func _physics_process(delta: float) -> void:
-	
+	globals.player_pos = global_position
 	power = Input.get_action_strength("up")
 	rotation += Input.get_axis("left", "right")*delta*turn_speed
 	direction = (nose.global_position-position).normalized()
@@ -24,6 +25,7 @@ func _physics_process(delta: float) -> void:
 	if power != 0:
 		gpu_particles_2d.emitting = true
 		velocity = direction*speed*power*delta
+
 	else:
 		gpu_particles_2d.emitting = false
 		velocity *= drag

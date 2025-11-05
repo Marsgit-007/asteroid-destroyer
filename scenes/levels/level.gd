@@ -24,6 +24,7 @@ var asteroid_direction:Vector2
 
 func _ready() -> void:
 	player.new_laser.connect(fire_laser)
+	globals.change_difficulty.connect(challenge_change)
 	asteroid_timer.start()
 
 
@@ -63,9 +64,11 @@ func new_asteroid():
 	asteroid.populate(coordinates, asteroid_resources[2])
 	asteroid.move(asteroid_direction)
 
+func challenge_change(new_level):
+	pass # challenge change script start here!
+
 
 func _on_asteroid_detection_area_entered(area: Area2D) -> void:
-	print_debug("asteroid destroyed")
 	area.queue_free()
 
 
