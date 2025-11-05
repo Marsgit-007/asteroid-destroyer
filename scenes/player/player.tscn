@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://btdmm0in15714"]
+
+[ext_resource type="Script" uid="uid://by7kp5lmqydmu" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://bcvmskil0iluw" path="res://assets/graphics/art/ship.aseprite.png" id="2_gmlin"]
+[ext_resource type="Shader" uid="uid://dwehikvrokq6t" path="res://scenes/player/player.gdshader" id="2_lvxji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p47bc"]
+shader = ExtResource("2_lvxji")
+shader_parameter/pixel_scale = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(83, 52, 3, 3)
+
+[sub_resource type="Curve" id="Curve_gmlin"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lvxji"]
+curve = SubResource("Curve_gmlin")
+
+[sub_resource type="Gradient" id="Gradient_lvxji"]
+offsets = PackedFloat32Array(0, 0.3469388, 0.75510204)
+colors = PackedColorArray(1, 0.61960787, 0.03137255, 1, 1, 0.18431373, 0.29803923, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p47bc"]
+gradient = SubResource("Gradient_lvxji")
+
+[sub_resource type="Curve" id="Curve_75vfm"]
+_data = [Vector2(0, 0.82022476), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0owmy"]
+curve = SubResource("Curve_75vfm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qek5x"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.51
+angle_curve = SubResource("CurveTexture_lvxji")
+spread = 100.0
+initial_velocity_max = 37.04
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_0owmy")
+color_ramp = SubResource("GradientTexture1D_p47bc")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lvxji"]
+polygon = PackedVector2Array(15, -53, -15, -53, -15, -51.9, -20.7, -47, -23, -47, -23, -40.1, -24.7, -39, -27, -39, -27, -32.1, -28.7, -31, -31, -31, -31, -24.1, -32.7, -23, -35, -23, -35, -16.099998, -36.7, -15, -39, -15, -39, -7.799999, -44.9, -1, -47, -1, -47, 5.9000015, -48.7, 7, -50.4, 7, -51, 8.700001, -51, 49.4, -47, 52.1, -47, 53, -14.200001, 53, -8.200001, 47, 9.299999, 47, 15, 51.9, 15, 53, 47.4, 53, 50.1, 49, 51, 49, 51, 8.200001, 47.800003, 5, 47, 5, 47, 0.29999924, 40, -9, 39, -9, 39, -13.799999, 35.800003, -17, 35, -17, 35, -21.8, 31.800003, -25, 31, -25, 31, -29.7, 23, -39.7, 23, -46, 15, -52)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_dovo2")
+
+[node name="Nose" type="Marker2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_p47bc")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_gmlin")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 11)
+amount = 16
+texture = SubResource("AtlasTexture_gmlin")
+process_material = SubResource("ParticleProcessMaterial_qek5x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.25, 0.25)
+polygon = PackedVector2Array(15, -53, -15, -53, -15, -51.9, -20.7, -47, -23, -47, -23, -40.1, -24.7, -39, -27, -39, -27, -32.1, -28.7, -31, -31, -31, -31, -24.1, -32.7, -23, -35, -23, -35, -16.099998, -36.7, -15, -39, -15, -39, -7.799999, -44.9, -1, -47, -1, -47, 5.9000015, -48.7, 7, -50.4, 7, -51, 8.700001, -51, 49.4, -47, 52.1, -47, 53, -14.200001, 53, -8.200001, 47, 9.299999, 47, 15, 51.9, 15, 53, 47.4, 53, 50.1, 49, 51, 49, 51, 8.200001, 47.800003, 5, 47, 5, 47, 0.29999924, 40, -9, 39, -9, 39, -13.799999, 35.800003, -17, 35, -17, 35, -21.8, 31.800003, -25, 31, -25, 31, -29.7, 23, -39.7, 23, -46, 15, -52)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(0.25, 0.25)
+occluder = SubResource("OccluderPolygon2D_lvxji")

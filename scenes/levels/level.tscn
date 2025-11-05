@@ -1,0 +1,231 @@
+[gd_scene load_steps=15 format=3 uid="uid://cog164jm226ok"]
+
+[ext_resource type="PackedScene" uid="uid://btdmm0in15714" path="res://scenes/player/player.tscn" id="1_377w7"]
+[ext_resource type="Texture2D" uid="uid://m2xk7tgk16w6" path="res://assets/graphics/art/starry_sky.aseprite" id="1_bovvr"]
+[ext_resource type="Script" uid="uid://ced5mdmtgay7l" path="res://scenes/levels/level.gd" id="1_d4w6o"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_mbbpy"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_ouxo3"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_icy5c"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_d4w6o"]
+b = Vector2(640, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mbbpy"]
+b = Vector2(0, 360)
+
+[sub_resource type="Resource" id="Resource_rmjfq"]
+script = ExtResource("6_icy5c")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ouxo3"]
+a = Vector2(-50, -50)
+b = Vector2(690, -50)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_icy5c"]
+a = Vector2(-50, 411)
+b = Vector2(-50, -50)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rmjfq"]
+a = Vector2(816, 4)
+b = Vector2(-102, 10)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7pb6i"]
+a = Vector2(-110, 635)
+b = Vector2(-107, 8)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xfk5q"]
+a = Vector2(-42, 632)
+b = Vector2(-49, 10)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_d4w6o")
+metadata/_edit_vertical_guides_ = [-51.0, 690.0, -51.0, 676.0, 147.0]
+metadata/_edit_horizontal_guides_ = [-50.0, 118.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(320.00003, 180.00002)
+scale = Vector2(5, 5)
+texture = ExtResource("1_bovvr")
+region_rect = Rect2(0, 0, 128, 72)
+
+[node name="Player" parent="." instance=ExtResource("1_377w7")]
+position = Vector2(322, 182)
+
+[node name="barriers" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="barriers"]
+shape = SubResource("SegmentShape2D_d4w6o")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="barriers"]
+position = Vector2(0, 360)
+shape = SubResource("SegmentShape2D_d4w6o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="barriers"]
+shape = SubResource("SegmentShape2D_mbbpy")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="barriers"]
+position = Vector2(640, 0)
+shape = SubResource("SegmentShape2D_mbbpy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320.00003, 180.00002)
+zoom = Vector2(0.5, 0.5)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("4_mbbpy")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(320.00003, 180.00002)
+script = ExtResource("5_ouxo3")
+follow_mode = 1
+follow_target = NodePath("../Background")
+zoom = Vector2(0.5, 0.5)
+tween_resource = SubResource("Resource_rmjfq")
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[node name="LaserDetection" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDetection"]
+shape = SubResource("SegmentShape2D_ouxo3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LaserDetection"]
+position = Vector2(0, 460)
+shape = SubResource("SegmentShape2D_ouxo3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LaserDetection"]
+shape = SubResource("SegmentShape2D_icy5c")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LaserDetection"]
+position = Vector2(740, 0)
+shape = SubResource("SegmentShape2D_icy5c")
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="TopSpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(-49, -49)
+
+[node name="Marker2D2" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(70, -48)
+
+[node name="Marker2D3" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(200, -49)
+
+[node name="Marker2D4" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(318, -50)
+
+[node name="Marker2D5" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(431, -50)
+
+[node name="Marker2D6" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(514, -50)
+
+[node name="Marker2D7" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(595, -49)
+
+[node name="Marker2D8" type="Marker2D" parent="TopSpawnPoints"]
+position = Vector2(685, -50)
+
+[node name="LeftSpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-50, 17)
+
+[node name="Marker2D2" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-51, 70)
+
+[node name="Marker2D3" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-51, 149)
+
+[node name="Marker2D4" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-51, 234)
+
+[node name="Marker2D5" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-50, 315)
+
+[node name="Marker2D6" type="Marker2D" parent="LeftSpawnPoints"]
+position = Vector2(-52, 378)
+
+[node name="AsteroidDetection" type="Area2D" parent="."]
+position = Vector2(3, -151)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteroidDetection"]
+shape = SubResource("SegmentShape2D_rmjfq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AsteroidDetection"]
+position = Vector2(-8, 625)
+shape = SubResource("SegmentShape2D_rmjfq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AsteroidDetection"]
+shape = SubResource("SegmentShape2D_7pb6i")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AsteroidDetection"]
+position = Vector2(849, -3)
+shape = SubResource("SegmentShape2D_xfk5q")
+
+[node name="RightSpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(691, 33)
+
+[node name="Marker2D2" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(690, 102)
+
+[node name="Marker2D3" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(691, 182)
+
+[node name="Marker2D4" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(690, 268)
+
+[node name="Marker2D5" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(691, 332)
+
+[node name="Marker2D6" type="Marker2D" parent="RightSpawnPoints"]
+position = Vector2(691, 388)
+
+[node name="BottomSpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(-16, 411)
+
+[node name="Marker2D2" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(57, 413)
+
+[node name="Marker2D3" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(154, 409)
+
+[node name="Marker2D4" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(239, 409)
+
+[node name="Marker2D5" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(332, 409)
+
+[node name="Marker2D6" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(409, 411)
+
+[node name="Marker2D7" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(491, 410)
+
+[node name="Marker2D8" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(568, 412)
+
+[node name="Marker2D9" type="Marker2D" parent="BottomSpawnPoints"]
+position = Vector2(637, 412)
+
+[connection signal="area_entered" from="LaserDetection" to="." method="_on_laser_detection_area_entered"]
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="area_entered" from="AsteroidDetection" to="." method="_on_asteroid_detection_area_entered"]

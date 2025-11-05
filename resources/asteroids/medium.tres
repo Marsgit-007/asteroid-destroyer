@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AsteroidInfo" load_steps=5 format=3 uid="uid://dlh2yks1loyd"]
+
+[ext_resource type="Shape2D" uid="uid://6utovrqsr3vc" path="res://resources/asteroids/medium_collision.tres" id="1_md86w"]
+[ext_resource type="Texture2D" uid="uid://c02svif7t11j1" path="res://resources/asteroids/asteroid_medium.aseprite" id="2_31lx4"]
+[ext_resource type="OccluderPolygon2D" uid="uid://coch8mm616ua" path="res://resources/asteroids/medium_occluder.tres" id="3_6moqt"]
+[ext_resource type="Script" uid="uid://dyx7w4xxxcaou" path="res://resource scripts/AsteroidInfo.gd" id="4_dqmlr"]
+
+[resource]
+script = ExtResource("4_dqmlr")
+icon = ExtResource("2_31lx4")
+occluder = ExtResource("3_6moqt")
+collider = ExtResource("1_md86w")
+metadata/_custom_type_script = "uid://dyx7w4xxxcaou"

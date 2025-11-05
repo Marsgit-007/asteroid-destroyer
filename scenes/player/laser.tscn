@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://q6v2td66wmdt"]
+
+[ext_resource type="Script" uid="uid://crh8ghkjiygmp" path="res://scenes/player/laser.gd" id="1_81xyw"]
+[ext_resource type="Texture2D" uid="uid://bnq20bpc4wrqs" path="res://assets/graphics/art/circle.png" id="2_xyo3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyo3k"]
+size = Vector2(1, 4)
+
+[node name="Laser" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("1_81xyw")
+metadata/_edit_horizontal_guides_ = [2.0, 3.0]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.6
+shadow_enabled = true
+texture = ExtResource("2_xyo3k")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, -2)
+rotation = 1.5707964
+points = PackedVector2Array(0, 0, 2.59367, 0, 4, 0)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xyo3k")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
