@@ -8,11 +8,11 @@ var score:int = 0:
 		if score == value:
 			return
 		score = value
-		if value >= 500:
+		if value == 500:
 			change_difficulty.emit("medium")
-		if value >= 500:
+		if value >= 1000 and value < 20000:
 			change_difficulty.emit("hard")
-		if value >= 500:
+		if value >= 2000 and value < 3000:
 			change_difficulty.emit("crazy")
-		if value >= 500:
+		if value >= 3000:
 			change_difficulty.emit("impossible")
