@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cog164jm226ok"]
+[gd_scene load_steps=16 format=3 uid="uid://cog164jm226ok"]
 
 [ext_resource type="PackedScene" uid="uid://btdmm0in15714" path="res://scenes/player/player.tscn" id="1_377w7"]
 [ext_resource type="Texture2D" uid="uid://m2xk7tgk16w6" path="res://assets/graphics/art/starry_sky.aseprite" id="1_bovvr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_mbbpy"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_ouxo3"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_icy5c"]
+[ext_resource type="PackedScene" uid="uid://dvfb0nn1clfqw" path="res://scenes/UI/game_ui.tscn" id="7_mbbpy"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_d4w6o"]
 b = Vector2(640, 0)
@@ -38,8 +39,8 @@ b = Vector2(-42, 10)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_d4w6o")
-metadata/_edit_vertical_guides_ = [-51.0, 690.0, -51.0, 676.0, 147.0]
-metadata/_edit_horizontal_guides_ = [-50.0, 118.0]
+metadata/_edit_vertical_guides_ = [250.0, 398.0]
+metadata/_edit_horizontal_guides_ = [28.0]
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -226,6 +227,14 @@ position = Vector2(568, 412)
 
 [node name="Marker2D9" type="Marker2D" parent="BottomSpawnPoints"]
 position = Vector2(637, 412)
+
+[node name="GameUI" parent="." instance=ExtResource("7_mbbpy")]
+anchors_preset = -1
+offset_left = 320.0
+offset_top = 10.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="LaserDetection" to="." method="_on_laser_detection_area_entered"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

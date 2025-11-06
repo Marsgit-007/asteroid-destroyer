@@ -10,7 +10,7 @@ var moving:bool = false
 var movement_vector:Vector2
 var speed:int = 50
 var value:int
-
+var type:String
 
 
 func _physics_process(delta: float) -> void:
@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 func populate(pos:Vector2, data:AsteroidInfo):
+	type = data.type
 	global_position = pos
 	sprite_2d.texture = data.icon 
 	collision_shape_2d.shape = data.collider

@@ -6,3 +6,4 @@ class_name AsteroidInfo
 @export var occluder:OccluderPolygon2D
 @export var collider:CircleShape2D
 @export var score:int
+@export var type:String

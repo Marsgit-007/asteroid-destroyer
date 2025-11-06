@@ -11,4 +11,5 @@ icon = ExtResource("2_cpslc")
 occluder = ExtResource("3_u0fk5")
 collider = ExtResource("1_twv41")
 score = 500
+type = "large"
 metadata/_custom_type_script = "uid://dyx7w4xxxcaou"

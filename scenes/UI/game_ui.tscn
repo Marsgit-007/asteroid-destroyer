@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvfb0nn1clfqw"]
+
+[ext_resource type="Texture2D" uid="uid://e7hw6w8845yu" path="res://assets/graphics/art/progress_under.aseprite" id="1_c1sxn"]
+[ext_resource type="Script" uid="uid://do32s8uwhgmlb" path="res://scenes/UI/game_ui.gd" id="1_yr8ot"]
+[ext_resource type="Texture2D" uid="uid://ba4v8wjjv75ta" path="res://assets/graphics/art/progress_border.aseprite" id="2_yr8ot"]
+[ext_resource type="Texture2D" uid="uid://cf3tqpqfeda61" path="res://assets/graphics/art/progress_bar.aseprite" id="3_5b3ti"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yr8ot")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+value = 100.0
+texture_under = ExtResource("1_c1sxn")
+texture_over = ExtResource("2_yr8ot")
+texture_progress = ExtResource("3_5b3ti")
+
+[node name="HideBarTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="HideBarTimer" to="." method="_on_hide_bar_timer_timeout"]

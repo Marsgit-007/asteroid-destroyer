@@ -40,7 +40,16 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if "asteroid" in area and not invulnerable:
+		
 		sprite_2d.texture = SHIP_DAMAGED
+		match area.type:
+			"small":
+				globals.health += -10
+			"medium":
+				globals.health += -20
+			"large":
+				globals.health += -30
+				
 		invulnerable = true
 		invulnerable_timer.start()
 

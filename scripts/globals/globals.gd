@@ -1,8 +1,18 @@
 extends Node
 
 signal change_difficulty(level:String)
+signal change_health_bar(new_health)
 
 var player_pos:Vector2
+var health:int = 100:
+	set(value):
+		if health == value:
+			return
+		health = value
+		change_health_bar.emit(value)
+		if health <= 0:
+			print("dead")
+		
 var score:int = 0:
 	set(value):
 		if score == value:
