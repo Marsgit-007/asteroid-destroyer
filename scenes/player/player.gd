@@ -9,6 +9,8 @@ signal new_laser(initial_pos, direction, turn)
 @onready var invulnerable_timer: Timer = $InvulnerableTimer
 @onready var  SHIP_NORMAL = preload("uid://bcvmskil0iluw")
 
+
+
 var nose_pos:Vector2
 var direction
 var speed:int = 10000
@@ -17,6 +19,8 @@ var power
 var drag: float = 0.955
 var elapsed_time:float = 0.0
 var invulnerable:bool = false
+
+
 
 
 func _physics_process(delta: float) -> void:

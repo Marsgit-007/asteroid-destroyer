@@ -15,15 +15,15 @@ grow_vertical = 2
 script = ExtResource("1_yr8ot")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -37.5
+offset_right = 112.5
+offset_bottom = 30.0
 grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
 value = 100.0
 texture_under = ExtResource("1_c1sxn")
 texture_over = ExtResource("2_yr8ot")
@@ -31,5 +31,44 @@ texture_progress = ExtResource("3_5b3ti")
 
 [node name="HideBarTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 0
+
+[node name="ScoreLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "score:"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 20.0
+offset_bottom = 42.0
+grow_horizontal = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(20, 12)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[wave amp=30
+.0 freq=5.0 connected=1]+100[/wave]"
 
 [connection signal="timeout" from="HideBarTimer" to="." method="_on_hide_bar_timer_timeout"]

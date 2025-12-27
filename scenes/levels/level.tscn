@@ -228,13 +228,9 @@ position = Vector2(568, 412)
 [node name="Marker2D9" type="Marker2D" parent="BottomSpawnPoints"]
 position = Vector2(637, 412)
 
-[node name="GameUI" parent="." instance=ExtResource("7_mbbpy")]
-anchors_preset = -1
-offset_left = 320.0
-offset_top = 10.0
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("7_mbbpy")]
 
 [connection signal="area_entered" from="LaserDetection" to="." method="_on_laser_detection_area_entered"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

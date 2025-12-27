@@ -2,6 +2,7 @@ extends Node
 
 signal change_difficulty(level:String)
 signal change_health_bar(new_health)
+signal change_score_label(new_score)
 
 var player_pos:Vector2
 var health:int = 100:
@@ -18,6 +19,7 @@ var score:int = 0:
 		if score == value:
 			return
 		score = value
+		change_score_label.emit(score)
 		if value == 500:
 			change_difficulty.emit("medium")
 		if value >= 1000 and value < 20000:
